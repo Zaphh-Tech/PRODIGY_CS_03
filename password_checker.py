@@ -7,6 +7,12 @@ import getpass
 import string
 import sys
 
+try:
+    from brand import boot
+except Exception:
+    def boot(*a, **k):
+        pass
+
 
 def check_password(pw):
     if pw is None:
@@ -97,6 +103,7 @@ def main(argv=None):
     p = argparse.ArgumentParser(description="password strength checker")
     p.add_argument("--password", default=None)
     a = p.parse_args(argv)
+    boot("Password Checker", "CS-03", "rates password strength 0-5 with feedback")
 
     if a.password is not None:
         print("note: --password shows up in shell history, use interactive mode for real passwords", file=sys.stderr)
